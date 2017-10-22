@@ -1,0 +1,120 @@
+---
+layout: default
+title: Home
+---
+
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome!</title>
+</head>
+<body>
+
+<h1>Welcome</h1>
+<p>
+    Thank you for visiting my website.
+    My research focuses on robot learning, computer vision, and reinforcement learning.
+    I also like participating in Kaggle computer vision related competitions.
+</p>
+
+<hr style="border: 1.5px solid #bbbbbb;"/>
+<div class="intro">
+
+    <div>
+        <h1>Publications</h1>
+        <h3>Pre-print</h3>
+            <p>
+                <a href="https://arxiv.org/abs/1709.07911">
+                    Avoidance of Manual Labeling in Robotic
+                    Autonomous Navigation Through Multi-Sensory Semi-Supervised Learning
+                </a>,
+                <b>Junhong Xu</b>, Shangyue Zhu, Hanqing Guo, Shaoen Wu.
+                <span style="color: #d44950;">Submitted to ICRA 2018</span>.
+
+                <br>
+                <button class="button">Project website</button>
+            </p>
+        <h3>Selected publications</h3>
+            <p>
+                <a href="{{ site.baseurl}}/papers/Facial Keypoint Recognition.pdf">
+                    Masked Loss Residual Convolutional Neural Network For Facial Keypoint Detection
+                </a>,
+                <b>Junhong Xu</b>, Shaoen Wu, Shangyue Zhu, Hanqing Guo, Honggang Wang, Qing Yang.
+                <span style="color: #d44950;">Accepted by IEEE MOBIMEDIA 2017</span>
+            </p>
+        <h3>Other publications</h3>
+            <p>
+                 <a href="{{ site.baseurl}}/papers/full_duplex.pdf">
+                     Realtime Software Defined Self-Interference Cancellation Based on Machine Learning for
+                     In-Band Full Duplex Wireless Communications,
+                 </a>
+                Hanqing Guo, <b>Junhong Xu</b>, Shangyue Zhu, Shaoen Wu <span style="color: #d44950;">Accepted by ICNC 2018</span>
+            </p>
+    </div>
+
+    <hr style="border: 1.5px solid #bbbbbb;"/>
+
+    <div>
+        <h1> Kaggle Competitions </h1>
+        {% for post in site.posts %}
+            {% if post.title contains "Kaggle"%}
+                <p>{{post.date | date: "%b %e, %Y"}}
+                    <a  href="{{ site.baseurl }}/{{ post.url }}">{{ post.title }}.</a> <b>{{ post.rank }}</b>
+                    <br>
+                    Github: <a href="{{ post.github }}">{{ post.github }}</a>
+                </p>
+            {% endif %}
+
+        {% endfor %}
+
+    </div>
+
+    <hr style="border: 1.5px solid #bbbbbb;"/>
+
+    <div>
+        <h1> Paper Implementations </h1>
+
+        <h3>Reinforcement Learning</h3>
+            <p>
+                DDPG solves torcs using pytorch
+                <br>
+                Github: <a href="https://github.com/JunhongXu/imitation-torcs/tree/master/rl_model">
+                            https://github.com/JunhongXu/imitation-torcs/tree/master/rl_model
+                        </a>
+            </p>
+            <p>
+                Parallel actor-critic solving navigation task in Minecraft environment.
+                <br>
+                Github: <a  href="https://github.com/JunhongXu/pytorch-a2c-minecraft">
+                            https://github.com/JunhongXu/pytorch-a2c-minecraft
+                        </a>
+
+            </p>
+            <p>
+                Deep deterministic policy gradient implemented by tensorflow.
+                <br>
+                Github: <a  href="https://github.com/JunhongXu/Reinforcement-Learning-Tensorflow">
+                            https://github.com/JunhongXu/Reinforcement-Learning-Tensorflow
+                        </a>
+
+            </p>
+        <h3>GANs</h3>
+            <p>
+                WGAN implemented by tensorflow
+                <br>
+                Github: <a href="https://github.com/JunhongXu/WGAN-TF">
+                            https://github.com/JunhongXu/WGAN-TF
+                        </a>
+            </p>
+            <p>
+                DCGAN implemented by tensorflow
+                <br>
+                Github: <a href="https://github.com/JunhongXu/DCGAN-TensorFlow">
+                            https://github.com/JunhongXu/DCGAN-TensorFlow
+                        </a>
+            </p>
+    </div>
+</div>
+</body>
+</html>
+

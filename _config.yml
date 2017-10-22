@@ -1,0 +1,27 @@
+# Dependencies
+markdown:         redcarpet
+highlighter:      pygments
+
+# Permalinks
+permalink:        /:title/
+
+# Setup
+title:            Junhong Xu
+tagline:          'Junhong Xu'
+description:      'I am a graduate student studying Computer Science. My current concentration is on Robot Learning.'
+avatar: https://avatars.githubusercontent.com/junhongxu
+baseurl:          "/JunhongXu.github.io"
+email:      jxu7@bsu.edu
+
+author:
+  name:           'Junhong Xu'
+
+paginate:         5
+
+# Custom vars
+version:          2.1.0
+
+github:
+  repo:           https://github.com/JunhongXu
+
+gems: [jekyll-paginate]
