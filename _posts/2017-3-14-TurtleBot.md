@@ -3,16 +3,18 @@ layout: post
 title: Building an automated navigating turtlebot using tensorflow with Jetson TX1 and iCreate 2
 ---
 
+I am intersted in automated robots. It is my ultimate goal to build a robot 
+that can help people do repetitive works like doing laundry or 
+opening doors. In this project, I used tensorflow to train a convolutional neural network to make a 
+Jetson TX1 powered robot navigate in a building hallway. 
+
 <object type="application/x-shockwave-flash" style="width:450px; height:366px;" data="//www.youtube.com/v/BvOjQcOTBvU?color2=FBE9EC&amp;version=3">
         <param name="movie" value="//www.youtube.com/v/BvOjQcOTBvU?color2=FBE9EC&amp;version=3" />
         <param name="allowFullScreen" value="true" />
         <param name="allowscriptaccess" value="always" />
         </object>
 
-I am intersted in automated robots. It is my ultimate goal to build a robot 
-that can help people do repetitive works like doing laundry or 
-opening doors. In this project, I used tensorflow to train a convolutional neural network to make a 
-Jetson TX1 powered robot navigate in a building hallway. 
+
 
 I made a autonomous RC car during my 
 undergraduate thesis using an iPhone and macbook pro 
