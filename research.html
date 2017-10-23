@@ -1,21 +1,92 @@
 ---
 layout: page
-title: Research
+title: Research Experience
 ---
-<div class="posts">
-  {% for post in site.research %}
-  <div class="post">
-    <h2 class="post-title">
-      <a href="{{ post.url }}">
-        {{ post.title }}
+<html>
 
-      </a>
-    </h2>
-    <div class="entry">
-      {{ post.excerpt }}
-    </div>
-    <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
-    <span class="post-date">{{ post.date | date_to_string }}</span>
+  <hr style="border: solid 1.5px;">
+  <div>
+      <h3>Autonomous Driving Using Imitation Learning </h3>
+      <ul>
+          <li>
+              <p>
+                  <b>Comparing Effectiveness of Different Network Structures in Imitation Learning</b>
+                  <span style="color: #0099ff;">(on going)</span>
+              </p>
+          </li>
+          <li>
+              <p>
+                  <b>Avoidance of Manual Labeling in Robotic Autonomous Navigation
+                      Through Multi-Sensory Semi-Supervised Learning</b>
+              </p>
+              <table style="background: white">
+                  <tr>
+                      <td>
+                          <img src="{{ site.baseurl }}/images/imitation-avoidance.png" style="width: 100%" />
+                      </td>
+                      <td>
+                            <span style="font-size: 15px">
+                              Navigation and recording policies are parameterized by a
+                                CNN and a two-layer fully connected network.
+                          </span>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td style="align-content: center;">
+                          <img src="{{ site.baseurl }}/images/robot.jpg" style="width: 100%; "/>
+                      </td>
+                      <td width="200px">
+                          <span style="font-size: 15px">
+                              iRobot Create2 mounted with Nvidia Jetson TX1
+                              with Zed stereo camera and ultrasonic sensors
+                          </span>
+                      </td>
+                  </tr>
+
+              </table>
+              <p>
+                  Using imitation learning in real-world robot navigation task without human correction. Our proposed
+                  framework allows the robot to learn from a suboptimal policy derived from imperfect sensor data
+                  without overfitting. This suboptimal policy eliminates the need of human correction in DAgger algorithm.
+                  In addition, the recording policy constrains the robot learning from the suboptimal policy. In the
+                  experiment, we show that the framework can achieve near human performance in most of the tasks and
+                  even surpasses human performance in case of unexpected events.
+              </p>
+
+              <p>
+                  Please also check out my blog post on the robot and ROS packages that I used.
+                  <a href="{{ site.baseurl }}/TurtleBot">[Link]</a>
+              </p>
+          </li>
+
+      </ul>
+      <div>
+
+      </div>
+      <div>
+
+      </div>
+
   </div>
-  {% endfor %}
-</div>
+
+  <div>
+      <h3> Full Duplex Wireless Interference Cancellation Using Machine Learning </h3>
+      <ul>
+          <li>
+              <div>
+                  <b>
+                      Realtime Software Defined Self-Interference Cancellation Based on Machine Learning
+                      for In-Band Full Duplex Wireless Communications
+                  </b>
+                  <p>
+                      The proposed method uses a fully connected neural network implemented in tensorflow to predict
+                      self-interference in digital domain. There is nearly 50 dB self-interference
+                      cancelled at 2500.150MHz after the training process which surpasses many baseline methods.
+                  </p>
+              </div>
+          </li>
+      </ul>
+
+  </div>
+
+</html>

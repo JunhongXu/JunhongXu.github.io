@@ -21,7 +21,7 @@ title: Home
 <div class="intro">
 
     <div>
-        <h1>Publications</h1>
+        <h2>Publications</h2>
         <h3>Pre-print</h3>
             <p>
                 <a href="https://arxiv.org/abs/1709.07911">
@@ -32,7 +32,9 @@ title: Home
                 <span style="color: #d44950;">Submitted to ICRA 2018</span>.
 
                 <br>
-                <button class="button">Project website</button>
+                <button class="button" onclick="window.location=href='https://www.youtube.com/watch?v=BvOjQcOTBvU'">
+                    Project video
+                </button>
             </p>
         <h3>Selected publications</h3>
             <p>
@@ -55,7 +57,7 @@ title: Home
     <hr style="border: 1.5px solid #bbbbbb;"/>
 
     <div>
-        <h1> Kaggle Competitions </h1>
+        <h2> Kaggle Competitions </h2>
         {% for post in site.posts %}
             {% if post.title contains "Kaggle"%}
                 <p>{{post.date | date: "%b %e, %Y"}}
@@ -72,7 +74,7 @@ title: Home
     <hr style="border: 1.5px solid #bbbbbb;"/>
 
     <div>
-        <h1> Paper Implementations </h1>
+        <h2> Paper Implementations </h2>
 
         <h3>Reinforcement Learning</h3>
             <p>
