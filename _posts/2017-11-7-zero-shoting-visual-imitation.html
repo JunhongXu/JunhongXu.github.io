@@ -1,0 +1,67 @@
+---
+layout: post
+title: Paper note -- Zero-Shot Visual Imitation
+---
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+This paper is submitted to ICLR 2018, under double blind review.
+<a href="https://openreview.net/pdf/033006fc0917363d809a60477a753aecc800ddf0.pdf"> Paper Link</a>
+<br/><br/>
+
+<ol>
+    <li>
+        Contributions<br/>
+        This paper proposed Parametric Skill Functions (PSF) that learns to act to achieve the goal state
+        given current and goal states based on expert demonstrations during inference.
+        During training, self-collected (randomly) samples are used to train a skill policy to reach a goal
+        state from the current state. This paper uses navigation and rope manipulation on real robots for experiments.
+        Compared to one-step inverse model (from goal and current state to actions), this model achieves much better results.
+    </li>
+    <br/>
+    <li>
+        Problems that the paper is trying to address<br/>
+        There are many methods to make a robot perform a given tasks, but they have their problems. Using prior knowledge of the task, which is not
+        applicable because we can not construct perfect state-action knowledge of the environment. Imitating expert demonstrations
+        is not practical because collecting so many demonstrations is time-consuming. Design reward needs task expertise.
+        Inverse reinforcement learning needs many demonstrations to learn a reward function.
+        The paper does not use any expert demonstrations or prior knowledge. The only thing they need from the expert
+        is a few goal demonstrations at inference time, which are hardly seen in training time through random explorations.
+    </li>
+    <br/>
+    <li>
+        How do the authors solve them?<br/>
+        They proposed a model combined with:
+        <ul>
+        <li>
+            Inverse model that takes $s_t,s_g,a_{t-1}$ (current state, goal/next state, and previous action)
+            and outputs $\hat{a}_t$, the predicted action.
+        </li>
+
+        <li>
+             Forward model that takes $s_t, a_t$ and outputs the predicted next state $\hat{s}_{t+1}$.
+        </li>
+
+        </ul>
+        <img src="{{ site.baseurl }}/images/zero-shot-imitation.png" style="width: 40%;"/>
+
+
+        <p>
+            The optimization objective is to minimize the distance between predicted next state and ground truth next state
+            as well as the predicted action and the ground truth action. In this way, the forward model acts as a regularizor
+            that constrains the predicted action that takes the robot as close to next state as possible.
+        </p>
+        <p>
+            Data is collected by randomly sample robot actions. Each data example
+            is sampled in the form of $\{ s_t, s_{t+1}, a_t, a_{t-1}\}$
+            in order to train the network. If a recurrent network is used, a trajectory of data will be sampled.
+        </p>
+     </li>
+
+    <li>
+        Thoughts<br/>
+        By adding a forward model to jointly optimize the whole network is a good idea. However,
+        the random data collection strategy is not efficient. Maybe an effective environment interaction strategy can
+        yield a better result?
+    </li>
+</ol>
+
+</html>
