@@ -19,7 +19,7 @@ This is a really interesting paper. It did not use any human supervision to lear
     <br/>
     <li>
         Problems that the paper is trying to address<br/>
-        There are many methods to make a robot perform a given tasks, but they have their problems. Using prior knowledge of the task, which is not
+        There are many methods to make a robot perform given tasks, but they have many limitations. Using prior knowledge of the task, which is not
         applicable because we can not construct perfect state-action knowledge of the environment. Imitating expert demonstrations
         is not practical because collecting so many demonstrations is time-consuming. Design reward needs task expertise.
         Inverse reinforcement learning needs many demonstrations to learn a reward function.
@@ -28,8 +28,8 @@ This is a really interesting paper. It did not use any human supervision to lear
     </li>
     <br/>
     <li>
-        How do the authors solve them?<br/>
-        They proposed a model combined with:
+        How do the authors solve these problems?<br/>
+        They proposed a network architecture that are composed of:
         <ul>
         <li>
             Inverse model that takes $s_t,s_g,a_{t-1}$ (current state, goal/next state, and previous action)
@@ -50,9 +50,9 @@ This is a really interesting paper. It did not use any human supervision to lear
             that constrains the predicted action that takes the robot as close to next state as possible.
         </p>
         <p>
-            Data is collected by randomly sample robot actions. Each data example
+            Data is collected by randomly sampling robot actions. Each data training example
             is sampled in the form of $\{ s_t, s_{t+1}, a_t, a_{t-1}\}$
-            in order to train the network. If a recurrent network is used, a trajectory of data will be sampled.
+            in order to train the network. If a recurrent network is used in predicting the actions, a trajectory of data will be sampled.
         </p>
      </li>
 
