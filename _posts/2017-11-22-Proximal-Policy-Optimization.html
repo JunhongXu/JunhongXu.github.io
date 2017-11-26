@@ -1,0 +1,390 @@
+---
+layout: post
+title: Using proximal policy optimization to play BipedalWalker
+---
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+  <div>
+    Result after 4 million (~2000 epochs) frames:
+    <video width="400" controls>
+      <source src="{{ site.baseurl }}/images/BipedalWalker01.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+    <video width="400" controls>
+      <source src="{{ site.baseurl }}/images/BipedalWalker02.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+    <p>
+      Quot from OpenAI
+      "BipedalWalker-v2 is considered "solved" when the agent obtains an
+      average reward of at least 300 over 100 consecutive episodes.". My result is
+      ~ 275 over 100 consecutive episodes. Not quite sovled, but with finetuning
+      the hyper parameters like entropy or learning rate.
+    </p>
+  </div>
+  <p>
+    Proximal Policy Optimization method is a policy gradient method that allows the
+    agent to perform minibatch updates over multiple epochs. OpenAI has pretty
+    good implementations in many state-of-the-art RL algorithms, but I believe it
+    is better to implement myself and try it out in some environments to really
+    learn the algorithm.
+
+  </p>
+  <p>
+    The goal of this post is to explain PPO and use it to play BipedalWalker
+    environment. Before talking about PPO, I would like to have a breif overview
+    of some background.
+  </p>
+  <h3>Background</h3>
+  <p>
+    A detailed
+    explaination on policy gradient, advantage function, and actor-critic method
+    can be found in
+    <a href="https://www.youtube.com/watch?v=KHZVXao4qXs">David Sliver class</a>
+    and
+    <a href="http://incompleteideas.net/sutton/book/bookdraft2017nov5.pdf">RL book by Sutton</a>.
+    I will just breifly write some basic ideas of them, if you do not want to read these,
+    please go to the code directly.
+  </p>
+  <ul>
+    <li>
+      <h4>Policy</h4>
+      <p>
+        A policy is a mapping from states to actions. There are two
+        types of policies: deterministic policy and stochastic policy.
+        Deterministic policy is straight forward: the agent sees a particular
+        state and outputs an action $a = \pi(s)$. The stochastic policy outputs
+        a distribution over actions: $\pi(a|s)$. I will just use stochastic
+        policy in this blog because I found it encourages exploration.
+      </p>
+      <p>
+        Often times, policies are represented by some function approximators
+        like neural networks. We can rewrite the policy as $\pi_{\theta}$, where
+        $\theta$ is the parameters of the policy. This is useful when we are
+        dealing with high dimensional state like images in Atari games.
+      </p>
+
+    </li>
+    <li>
+
+
+      <h4>Pliicy Gradient</h4>
+
+      <div>
+        <p>
+          Policy gradient method adjusts policy parameters (usually neural
+          networks) in order to maximize the expected return given policy
+          $\pi_{\theta}$ in any given state
+          $s$
+          $$ v_{\pi_{\theta}}(s) =  E_{\pi_{\theta}}[r_t + \gamma r_{t+1} +
+          ... + \gamma^{t+n-1} r_{t+n} | s_t = s]$$,
+
+          this formula is the expected sum of discounted reward the agent
+          will get following the policy $\pi_{\theta}$ at state $s$. Why do we
+          want to maximize this? Because this is the ultimate goal of RL: to
+          get the highest long term return in any given state.
+        </p>
+
+        <p>
+          In order to maximize $v_{\pi_{\theta}}(s)$, we need to find the
+          gradient of the value function with respect to the policy
+          parameter $\theta$ and do
+          gradient ascent. This is why we call the algorithm as policy gradient.
+
+          Here comes the math:
+
+          $$
+            \begin{split}
+            \nabla v_{\pi}(s) &= \nabla [\underset{s \in S}{\sum} d(s)
+            \underset{a \in A}{\sum} \pi_{\theta}(a|s) q_{\pi_{\theta}}(s,a)] \\
+            &= \underset{s \in S}{\sum} d(s) \underset{a \in A}{\sum} \pi_{\theta}(a|s)
+            \nabla_{\theta} log \pi(a|s)q_{\pi_{\theta}}(s,a) \\
+            &= E_{\pi}[  \nabla_{\theta} log \pi_{\theta}(a|s)q_{\pi_{\theta}}(s,a)]
+            \end{split}
+          $$,
+
+          in the equation above, $d(s)$ is the distribution over all possible
+          starting states and $ q_{\pi}(s, a)$ is the state-action value
+          function. Then we can update our policy parameter as
+          $\theta = \theta + \nabla_{\theta} log \pi(a|s)q_{\pi_{\theta}}(s,a)$
+          Intuitively, this equation means that if the value of this
+          state is positve given the action, we want our policy to increase
+          the chance of taking this action in this state and vice versa. Directly
+          calculating $q_{\pi}(s,a)$ is really hard because the dimension of
+          state action pair is large. Therefore, instead of calculating $q$, we
+          use return of each state in each episode as an unbiased sample of $q$.
+          This leads us to the first policy gradient algorithm, REINFORCE.
+
+          While this return represents the true value of this state taken an
+          action in an episode, it has a high variance. It means that your policy
+          only performs well in one run of the game. For example, in the
+          last episode of a shooting game,
+          you might get a high reward shooting at an enemy, but you might be
+          killed in this episode because there is another enemy behind you.
+        </p>
+      </div>
+    </li>
+    <li>
+      <h4>Actor Critic</h4>
+      <p>
+        In order to reduce variance, we need to estimate the state-action value
+        function $q_{w}(s, a) \approx q_{\pi}(s, a)$, where $w$ is the parameters
+        of the state-action value function. This estimator is called critic and
+        the policy $\pi$ is called actor. Therefore, the gradient of the policy
+        can be rewriten to $E_{\pi_{\theta}}[  \nabla log \pi_{\theta}(a|s)q_{w}(s,a)]$.
+        It is the same thing as the previous section, the only difference is
+        that we are updating our policy in the direction where our critic
+        thinks we will get more reward. The critic can be updated using many
+        objective functions such as TD error.
+      </p>
+    </li>
+    <li>
+      <h4>Advantage Function</h4>
+      <p>
+        <p>
+          Okay, nothing is perfect. By estimating $q$ value we are actually estimating
+          the direction of our policy gradient. This introduces bias. Another way to
+          estimate the gradient is to use advantage function.
+        </p>
+        <p>
+          <p>
+            Instead of updating the policy in the direction of
+            $q_{\pi_{\theta}}(s, a)$, we are going to update our policy in the direction
+            of $q_{\pi_{\theta}}(s, a) - B(s)$, where we subtract a baseline function
+            $B(s)$ from $q$.
+            Recall that our policy gradient
+            is $E_{\pi_{\theta}}[\nabla_{\theta} log \pi(a|s)q_{\pi_{\theta}}(s,a)]$,
+            but now it becomes
+            $E_{\pi_{\theta}}[\nabla_{\theta} log \pi_{\theta}(a|s)q_{\pi_{\theta}}(s,a) - \nabla_{\theta} log \pi_{\theta}(a|s)B(s)]$.
+            We can actually show that the term $E_{\pi_{\theta}}[\nabla_{\theta} log \pi(a|s)B(s)]$ is 0,
+            so it does not affect the direction of the gradient. Therefore, we
+            are able to subtract anything that is not affected by the action to reduce
+            the variance of $q$.
+          </p>
+          <p>
+            One common used baseline is the value function $v_{\pi}(s)$. The value
+            function represents the averaged return of all actions. If we subtract
+            this value from our $q$ function, we can lower the variance. This is also
+            called advantage function $A(s, a) = q_{\pi}(s, a) - v_{\pi}(s)$. It
+            tells us how much better or worse than usual it is to take action $a$.
+          </p>
+          <p>
+            But how can we come up with the value of $A(s, a)$? We can use another
+            neural network to parameterize the value function and use the reward we get
+            to calculate the q value:
+            $$
+              \begin{split}
+              \tilde{A}(s, a) &= q_{\pi_{\theta}}(s, a) - v_v(s) \\
+              &= r_t + \gamma r_{t+1} + ... + \gamma^{t+n-1} r_{t+n} - v_v(s)
+              \end{split}
+            $$
+            After esitmating the advantage, we can plug this into our normal
+            policy gradient algorithm:
+            $\theta = \theta + \nabla_{\theta} log \pi_{\theta}(a|s)\tilde{A}(s, a)$.
+          </p>
+          <p>
+            Recap in one sentence: the goal of all the above methods are trying
+            to find a good estimate of the policy gradient.
+          </p>
+        </p>
+      </p>
+    </li>
+  </ul>
+  <h3>Proximal Policy optimzation</h3>
+  <p>
+    Now, we are ready to talk about PPO.
+    Quot from the original paper "While it is appealing to perform multiple
+    steps of optimization on this loss $L^{PG}$ using the same trajectory,
+    doing so is not well-justified, ...". $L^{PG}$ is the objective function we
+    have mentioned many times: $E_{\pi_{\theta}}[log\pi_{\theta}(a|s)\tilde{A}(s, a)]$
+    for advantage function or $E_{\pi_{\theta}}[log\pi_{\theta}(a|s)q_w(s, a)]$ for the
+    naive actor-critic.
+    This sentence points out
+    one limitation of the policy gradient method: it can not update our
+    policy network using the same data multiple times like what we usually do
+    in supervised learning. Recall that what we have discussed in the previous
+    sections are how to get good estimate of our policy gradient. The reason why
+    it is hard to perform multiple updates using policy gradient is because
+    the gradient estimate is only valid for the current policy. The policy
+    flucuates a lot during the same updates, which does not make sense using the
+    same gradient estimate to optimize the new policy.
+  </p>
+  <p>
+    To allow multiple updates, PPO constraines the optimized policy as close to
+    the old policy as possible. Unlike Trust Region Policy Optimization which is
+    sovled using second order methods, PPO uses first order optimization (gradient ascent)
+    on clipped objective function:
+    $$ L^{CLIP}(\theta) = \tilde{E}_t[min(r_t(\theta)\tilde{A_t}, clip(r_t(\theta), 1-\epsilon, 1+\epsilon)\tilde{A}_t)] $$,
+    where $r_t(\theta) = \frac{\pi_{\theta}(a_t|s_t)}{\pi_{\theta_{old}}(a_t|s_t)}$
+    is the probability ratio between the updated new policy and the old policy.
+    Actually, $r_t(\theta)\tilde(A)_t$ is also called surrogate loss and the
+    gradient is the same as the normal policy gradient. If you are interested in
+    this, you can see more in the
+    <a href="https://channel9.msdn.com/Events/Neural-Information-Processing-Systems-Conference/Neural-Information-Processing-Systems-Conference-NIPS-2016/Deep-Reinforcement-Learning-Through-Policy-Optimization">
+      video
+    </a> presented in NIPS2016. The key idea of this clipped objective function
+    is to constrain the policy change that might take the new policy away from
+    the old one.
+  </p>
+  <h3 class="code">Code</h3>
+  I used pytorch to implement PPO. It has a cleaner API and easier to debug.
+  <ul>
+    <li>
+      <h4>
+        Policy and value networks
+      </h4>
+      Following the original paper, I used two seperate networks to paramterize
+      policy and value functions. Policy is defined as a Guassian policy. The mean and
+      log standard deviation are both parameterized by the network.
+      <pre class="python">
+      <code>
+        # action network
+        self.act_fc1 = nn.Linear(obs_space, 64)
+        self.act_fc2 = nn.Linear(64, 64)
+        self.mu = nn.Linear(64, action_space)
+        self.mu.weight.data.mul_(0.1)
+        # torch.log(std)
+        self.logstd = nn.Parameter(torch.zeros(action_space))
+      </code>
+      </pre>
+      The following code defines a value network which outputs the value of a given state.
+      <pre class="python">
+      <code>
+        # value network
+        self.value_fc1 = nn.Linear(obs_space, 64)
+        self.value_fc2 = nn.Linear(64, 64)
+        self.value_fc3 = nn.Linear(64, 1)
+        self.value_fc3.weight.data.mul(0.1)
+      </code>
+      </pre>
+      <p>
+        To output action, we need the current state and sample from a Gaussian
+        distribution with parameterized mean and std.
+      </p>
+      <pre class="python">
+      <code>
+        # action
+        act = self.act_fc1(x)
+        act = F.tanh(act)
+        act = self.act_fc2(act)
+        act = F.tanh(act)
+        mean = self.mu(act)  # N, num_actions
+        logstd = self.logstd.expand_as(mean)
+        std = torch.exp(logstd)
+        action = torch.normal(mean, std)
+      </code>
+      </pre>
+      <p>
+        To update our policy, we need these values: (log)probability
+        of our action to calculate $\frac{\pi_{\theta}(a|s)}{\pi_{\theta_{old}}(a|s)}$,
+        distribution entropy to encourage exploration, and
+        the value of this state $v_v(s)$ to calculate advantage.
+      </p>
+      <pre class="python">
+      <code>
+      def evaluate_actions(self, x, action):
+          v, _, _, mean = self.forward(x)
+          logstd = self.logstd.expand_as(mean)
+          std = torch.exp(logstd)
+          # evaluate
+          logprob = log_normal_density(action, mean, log_std=logstd, std=std)
+          dist_entropy = 0.5 + 0.5 * math.log(2 * math.pi) + logstd
+          dist_entropy = dist_entropy.sum(-1).mean()
+          return v, logprob, dist_entropy
+      </code>
+      </pre>
+
+      We are using log probability instead of probaility because it is easier to
+      do the ratio, we just subtract one from another and expontiate the value.
+
+    </li>
+    <li>
+      <h4>
+        PPO update
+      </h4>
+      <p>
+        All the update codes are located in model/ppo.py.
+        In order to update our policy, we need to first use our old policy to
+        generate trajectories and save (log)probability, action taken, the state,
+        rewards, and the estimated values:
+      </p>
+      <pre class="python">
+      <code>
+        while not (nstep == max_step):
+            if done:
+                if obs_fn is not None:
+                    obs = env.reset(relaunch=True)
+                else:
+                    obs = env.reset()
+            if is_render:
+                env.render()
+            if obs_fn is not None:
+                obs = obs_fn(obs)
+
+            obs = Variable(torch.from_numpy(obs[np.newaxis])).float().cuda()
+
+            value, action, logprob, mean = policy(obs)
+            value, action, logprob = value.data.cpu().numpy()[0], \
+                action.data.cpu().numpy()[0], logprob.data.cpu().numpy()[0]
+
+            next_obs, reward, done, _ = env.step(action)
+            observations.append(obs.data.cpu().numpy()[0])
+            rewards.append(reward)
+            logprobs.append(logprob)
+            dones.append(done)
+            values.append(value[0])
+            actions.append(action)
+      </code>
+      </pre>
+      <p>
+        We can now update our policy using the stored trajectories.
+        We first calculate our advantage values using returns(calculated using rewards)
+        minus the estimiated values. We then normlize the advantage to have
+        zero mean and unit std. This will accelerate learning.
+        </p>
+        <pre class="python">
+        <code>
+          advantages = returns - values
+          advantages = (advantages - advantages.mean()) / advantages.std()
+        </code>
+        </pre>
+      <p>
+        We update our policy in a loop with mini-batch size set to a certain number.
+        We first evaluate our new policy and get new value, new (log)probabilities. Then
+        calculate $r_t(\theta)$ and calculate policy objective/loss using PPO cliped
+        objective function:
+      </p>
+      <pre class="python">
+      <code>
+        new_value, new_logprob, dist_entropy =\
+            policy.evaluate_actions(sampled_obs, sampled_actions)
+
+        sampled_logprobs = sampled_logprobs.view(-1, 1)
+        ratio = torch.exp(new_logprob - sampled_logprobs)
+
+        sampled_advs = sampled_advs.view(-1, 1)
+        surrogate1 = ratio * sampled_advs
+        surrogate2 = torch.clamp(ratio, 1 - clip_value, 1 + clip_value) * sampled_advs
+        policy_loss = -torch.min(surrogate1, surrogate2).mean()
+      </code>
+      </pre>
+      The reason why we need a negative sign here is because we want to update
+      the policy in the direction of maximizing advantage, not the opposite. Almost
+      all auto-differentiable framekwork performs gradient descent, so we need to add
+      a negative sign to make the optimizer perform gradient ascent.
+      <p>
+        Rest of the code is straight forward, we just evaluate value loss using
+        mean squared error and do backpropgation to update policy and value networks.
+      </p>
+    </li>
+    <li>
+      <h3>Conclusion and Future works</h3>
+      <p>
+        I am more interested in combining RL with imitation learning.
+        There is a paper called "Generative Adverserial Imitation Learning"
+        which uses discriminator network in GAN to provide reward signal. They
+        used Trust Region Policy Optmization to update their generative/policy
+        network, I would like to implement their framework and use PPO instead. 
+      </p>
+    </li>
+  </ul>
+</html>
