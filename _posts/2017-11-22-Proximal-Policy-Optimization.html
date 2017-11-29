@@ -4,6 +4,9 @@ title: Use proximal policy optimization to play BipedalWalker and Torcs
 ---
 <html lang="en" xmlns="http://www.w3.org/1999/html">
   <div>
+    Github code link: <a href="https://github.com/JunhongXu/ppo-pytorch">https://github.com/JunhongXu/ppo-pytorch</a>
+  </div>
+  <div>
     Result after 4 million (~2000 epochs) frames:
     <video width="400" controls>
       <source src="{{ site.baseurl }}/images/BipedalWalker01.mp4" type="video/mp4">
@@ -12,7 +15,7 @@ title: Use proximal policy optimization to play BipedalWalker and Torcs
 
     <p>
       Update: After half day training in Torcs environment, PPO is able to
-      do better than DDPG(as per total reward).
+      do better than DDPG(total reward per episode).
     </p>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/3IEaWH3z8F4" frameborder="0" allowfullscreen></iframe>
     <p>
