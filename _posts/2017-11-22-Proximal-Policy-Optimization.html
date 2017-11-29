@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Using proximal policy optimization to play BipedalWalker
+title: Use proximal policy optimization to play BipedalWalker and Torcs
 ---
 <html lang="en" xmlns="http://www.w3.org/1999/html">
   <div>
@@ -9,10 +9,12 @@ title: Using proximal policy optimization to play BipedalWalker
       <source src="{{ site.baseurl }}/images/BipedalWalker01.mp4" type="video/mp4">
       Your browser does not support HTML5 video.
     </video>
-    <video width="400" controls>
-      <source src="{{ site.baseurl }}/images/BipedalWalker02.mp4" type="video/mp4">
-      Your browser does not support HTML5 video.
-    </video>
+
+    <p>
+      Update: After half day training in Torcs environment, PPO is able to
+      do better than DDPG(as per total reward).
+    </p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/3IEaWH3z8F4" frameborder="0" allowfullscreen></iframe>
     <p>
       Quot from OpenAI
       "BipedalWalker-v2 is considered "solved" when the agent obtains an
