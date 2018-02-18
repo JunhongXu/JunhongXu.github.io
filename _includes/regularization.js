@@ -1,26 +1,12 @@
 var N, data, labels;
 var ss = 30.0; // scale for drawing
-
-// create neural net
-var t = "layer_defs = [];\n\
-layer_defs.push({type:'input', out_sx:1, out_sy:1, out_depth:1});\n\
-layer_defs.push({type:'fc', num_neurons:20, activation:'relu'});\n\
-layer_defs.push({type:'fc', num_neurons:20, activation:'sigmoid'});\n\
-layer_defs.push({type:'regression', num_neurons:1});\n\
-\n\
-net = new convnetjs.Net();\n\
-net.makeLayers(layer_defs);\n\
-\n\
-trainer = new convnetjs.SGDTrainer(net, {learning_rate:0.01, momentum:0.0, batch_size:1, l2_decay:0.001});\n\
-";
-
 var lix=2; // layer id of layer we'd like to draw outputs of
 var weightDecay = 0.0;
 
 var layer_defs = [];
 layer_defs.push({type:'input', out_sx:1, out_sy:1, out_depth:1});
-layer_defs.push({type:'fc', num_neurons:20, activation:'relu'});
-layer_defs.push({type:'fc', num_neurons:20, activation:'sigmoid'});
+layer_defs.push({type:'fc', num_neurons:50, activation:'relu'});
+layer_defs.push({type:'fc', num_neurons:50, activation:'sigmoid'});
 layer_defs.push({type:'regression', num_neurons:1});
 var net = new convnetjs.Net();
 net.makeLayers(layer_defs);
