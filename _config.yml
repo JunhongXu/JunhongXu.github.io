@@ -7,10 +7,10 @@ permalink:        /:title/
 # Setup
 title:            Junhong Xu
 tagline:          'Junhong Xu'
-description:      'I am a graduate student studying Computer Science. My current concentration is on Robot Learning.'
+description:      'A Ph.D. student in Indiana University focusing on reinforcement learning and control for mobile vehicles.'
 avatar: https://avatars.githubusercontent.com/junhongxu
 baseurl:          "/JunhongXu.github.io"
-email:      jxu7@bsu.edu
+email:      xu14@iu.edu
 
 author:
   name:           'Junhong Xu'
