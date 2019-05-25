@@ -1,151 +1,99 @@
----
-layout: default
-title: Home
----
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<title>
+    Junhong Xu's Page
+</title>
 
-<html lang="en" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8">
-    <title>Welcome!</title>
-</head>
 <body>
+    <table align="center">
+        <tbody>
+            <tr>
+                <td style="width: 840px" valign="top" align="left">
+                    <table cellpadding="5px">
+                        <tbody>
+                            <tr>
+                                <td valign="top">
+                                    <img src="image/junhongxu.jpg" width="240px" height="240px">
+                                </td>
+                                <td valign="top" align="left">
+                                    <h2>Junhong Xu</h2>
+                                    <p>Ph.D. student in
+                                        <a href="http://vail.sice.indiana.edu/">Vehicle Autonomy and Intelligent Lab</a>
+                                        at
+                                        <a href="https://engineering.indiana.edu/">Indiana University, Bloomington</a>
+                                    </p>
+                                    <b>Address (temporary)</b>
+                                    <br>
+                                    2805 E 10th St, Bloomington, IN 47408
 
-<h1>Welcome</h1>
-<p style="color: #000;">
-    Thank you for visiting my website.
-    My name is Junhong Xu, a Ph.D. student in
-    <a href="http://vail.sice.indiana.edu/index.html">Vehicle Autonomy and Intelligence Lab (VAIL)</a>.
-    I am currently focusing on reinforcement learning and control on mobile vehicles in
-
-</p>
-
-<hr style="border: 1.5px solid #bbbbbb;"/>
-<div class="intro">
-
-    <div>
-        <h3>Publications</h3>
-            <p>
-                <b>J. Xu</b>, S. Zhu, H. Guo, and S. Wu. <a href="https://arxiv.org/abs/1709.07911">
-                Avoidance of manual labeling in robotic autonomous navigation
-                through multi-sensory semi-supervised learning.</a> arXiv preprint arXiv:1709.07911, 2017
-                <br>
-                <button class="button" onclick="window.location=href='https://www.youtube.com/watch?v=BvOjQcOTBvU'">
-                    Project video
-                </button>
-            </p>
-            <p>
-                <b>J. Xu</b>, S. Wu, H. Guo, H. Wang, and Q. Yang.
-                <a href="{{ site.baseurl}}/papers/Facial Keypoint Recognition.pdf">
-                 Masked loss residual convolutional neural network for facial keypoint detection.
-                </a> 10th EAI International Conference on Mobile Multimedia Communications,
-                Chongqing, China, June, 2017
-            </p>
-            <p>
-                S. Zhu, H. Guo, <b>J. Xu</b>, and S. Wu.
-                <a href="{{ site.baseurl}}/papers/sensor.pdf">
-                    Distance based user localization and tracking with mechanical
-                    ultrasonic beamforming.
-                </a>
-                International Conference on Computing, Networking and Communications
-                (ICNC), Maui, Hawaii, USA., March 5-8, 2018
-            </p>
-            <p>
-                H. Guo, <b>J. Xu</b>, S. Zhu, and S. Wu.  <a href="{{ site.baseurl}}/papers/full_duplex.pdf">
-                Realtime software defined self-interference cancellation based
-                on machine learning for in-band full duplex wireless communications.</a>
-                International Conference on Computing, Networking and Communications (ICNC),
-                Maui, Hawaii, USA., March 5-8, 2018
-            </p>
-            <p>
-              H. Guo, <b>J. Xu</b>, S. Zhu, and S. Wu. In-band full duplex wireless communications and networking for
-              iot devices: Progress, challenges and opportunities. Elsevier Future Generation Computer Systems
-              Journal, accepted, Oct. 2017
-            </p>
-              S. Wu, <b>J. Xu</b>, S. Zhu, and H. Guo. A deep residual convolutional neural network for facial keypoint
-              detection with missing labels. Elsevier Signal Processing Journal, accepted, Oct. 2017
-            <p>
-                S. Wu, J. Rendall, M. Smith, S. Zhu, <b>J. Xu</b>, Q. Yang, H. Wang, and P. Qin.
-                <a href="http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7851022">
-                    Survey on prediction
-                    algorithms in smart homes.
-                </a>IEEE Internet of Things Journal, Vol.4, No.3, pp 636-644, June 2017
-            </p>
-            <p>
-              S. Wu, K. Blair, <b>J. Xu</b>, S. Zhu, H. Guo, K. Wang, and L. Cheng. Real time video stitching by
-              exploring temporal and spatial features. 10th EAI International Conference on Mobile Multimedia
-              Communications, Chongqing, China, June, 2017
-            </p>
-    </div>
-
-    <hr style="border: 1.5px solid #bbbbbb;"/>
-
-    <div>
-        <h3> Kaggle Competitions </h3>
-        {% for post in site.posts %}
-            {% if post.title contains "Kaggle"%}
-                <p>{{post.date | date: "%b %e, %Y"}}
-                    <a  href="{{ site.baseurl }}/{{ post.url }}">{{ post.title }}.</a> <b>{{ post.rank }}</b>
+                                    <br>
+                                    <br>
+                                    <b>Email</b>
+                                    <br>
+                                    <img src="image/xu14@iu.edu.png">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h3>Research Interests</h3>
+                    <p>
+                        I have a broad interest in robot perception, planning, and learning.
+                        My current work focuses on planning in uncertain and time-varying environments. 
+                        I am also exploring new ways of representing environments (the classic examples are metric and topological maps) 
+                        for efficient planning.
+                        <br>
+                    </p>
+                    <h3>Selected Publications</h3>
+                    <b>Reachable Space Characterization of Markov Decision Processes with Time Variability</b>
                     <br>
-                    Github: <a href="{{ post.github }}">{{ post.github }}</a>
-                </p>
-            {% endif %}
-
-        {% endfor %}
-
-    </div>
-
-    <hr style="border: 1.5px solid #bbbbbb;"/>
-
-    <div>
-        <h3> Paper Implementations </h3>
-
-        <h4>Reinforcement Learning</h4>
-            <p>
-              Proximal Policy Optimization to play Torcs and OpenAI gym envs
-              <br>
-              Github: <a href="https://github.com/JunhongXu/ppo-pytorch">https://github.com/JunhongXu/ppo-pytorch</a>
-                <br>
-              Blog: <a href="{{ site.baseurl }}/Proximal-Policy-Optimization">Use proximal policy optimization to play BipedalWalker and Torcs</a>
-            </p>
-            <p>
-                DDPG solves torcs using pytorch
-                <br>
-                Github: <a href="https://github.com/JunhongXu/imitation-torcs/tree/master/rl_model">
-                            https://github.com/JunhongXu/imitation-torcs/tree/master/rl_model
-                        </a>
-            </p>
-            <p>
-                Parallel actor-critic solving navigation task in Minecraft environment.
-                <br>
-                Github: <a  href="https://github.com/JunhongXu/pytorch-a2c-minecraft">
-                            https://github.com/JunhongXu/pytorch-a2c-minecraft
-                        </a>
-
-            </p>
-            <p>
-                Deep deterministic policy gradient implemented by tensorflow.
-                <br>
-                Github: <a  href="https://github.com/JunhongXu/Reinforcement-Learning-Tensorflow">
-                            https://github.com/JunhongXu/Reinforcement-Learning-Tensorflow
-                        </a>
-
-            </p>
-        <h4>GANs</h4>
-            <p>
-                WGAN implemented by tensorflow
-                <br>
-                Github: <a href="https://github.com/JunhongXu/WGAN-TF">
-                            https://github.com/JunhongXu/WGAN-TF
-                        </a>
-            </p>
-            <p>
-                DCGAN implemented by tensorflow
-                <br>
-                Github: <a href="https://github.com/JunhongXu/DCGAN-TensorFlow">
-                            https://github.com/JunhongXu/DCGAN-TensorFlow
-                        </a>
-            </p>
-    </div>
-</div>
+                    Junhong Xu*, Yin Kai*, Lantao Liu. Accepted by RSS 2019.
+                    <br>
+                    <a href="https://arxiv.org/abs/1905.09342">[PDF]</a>
+                    <br><br>
+                    <b>State-Continuity Approximation of Markov Decision Processes 
+                        via Finite Element Analysis for Autonomous System Planning
+                    </b>
+                    <br>
+                    Junhong Xu, Yin Kai, Lantao Liu. Submitted to IROS 2019.
+                    <br>
+                    <a href="https://arxiv.org/pdf/1903.00948.pdf">[PDF]</a>
+                    <br><br>
+                    <b> 
+                        Automated Labeling for Robotic Autonomous Navigation Through Multi-Sensory 
+                        Semi-Supervised Learning on Big Data.
+                    </b>
+                    <br>
+                    Junhong Xu, Shangyue Zhu, Hanqing Guo, Shaoen Wu. Accepted by IEEE Transactions on Big Data.
+                    <br>
+                    <a href="https://ieeexplore.ieee.org/abstract/document/8611138">[PDF]</a> 
+                    <a href="https://arxiv.org/pdf/1709.07911.pdf">[Arxiv Version]</a>
+                    <a href="https://www.youtube.com/watch?v=BvOjQcOTBvU"> [Video] </a>
+                    <br><br>
+                    <b> 
+                        A Deep Residual Convolutional Neural Network for Facial Feypoint Detection with Missing Labels.
+                    </b>
+                    <br>
+                    Shaoen Wu, Junhong Xu, Shangyue Zhu, Hanqing Guo. Accepted by Signal Processing.
+                    <br>
+                    <a href="https://www.sciencedirect.com/science/article/pii/S0165168417303924">[PDF]</a> 
+                    
+                    <h3>Software</h3>
+                    <p>
+                        Proximal Policy Optimization: <a href="https://github.com/JunhongXu/ppo-pytorch">[Github link]</a>
+                    </p>
+                    <p>
+                        Deep Deterministic Policy Gradient: <a href="https://github.com/JunhongXu/pytorch-a2c-minecraft">[Github link]</a> 
+                    </p>
+                    <p>
+                        Parallel actor-critic solving navigation task in Minecraft environment: <a href="">[Github link]</a> 
+                    </p>
+                    <p>
+                        Deep Convolutional Generative Adversarial Network: <a href="https://github.com/JunhongXu/DCGAN-TensorFlow">[Github link]</a> 
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </body>
+
 </html>
