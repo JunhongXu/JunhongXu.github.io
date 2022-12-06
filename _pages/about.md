@@ -29,6 +29,6 @@ I am particularly interested in developing practical and scalable decision-makin
 
 3. **state uncertainty**, where the physical state of the robot cannot be accurately determined (e.g., localization error),
 
-4. **perception uncertainty**, where the outcome of a perception model is uncertain (e.g., pixel-wise uncertainty in semantic segmentation).
+4. **perception uncertainty**, where the outcome of a perception model is uncertain (e.g., object class cannot be predicted with certainty due to occlusion).
 
 Prior to my Ph.D., I also worked on [reducing DAgger's manual labeling in imitation learning](https://www.youtube.com/watch?v=BvOjQcOTBvU&t=55s&ab_channel=JunhongXu) and [multi-task imitation learning](https://arxiv.org/abs/1808.04503) for mobile robot navigation in indoor environments.
