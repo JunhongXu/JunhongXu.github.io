@@ -21,7 +21,7 @@ social: false  # includes social icons at the bottom of the page
 
 I am a fifth-year Ph.D. candidate at Vehicle Autonomy and Intelligence Lab at Indiana University, Bloomington.
 My research focuses on decision-making under uncertainty for real-world robotic applications.
-I am particularly interested in developing practical and scalable decision-making algorithms that consider the following commonly existing uncertainties in real-world robotic systems:
+I am particularly interested in developing practical and scalable decision-making algorithms (a.k.a. stochastic control -- I deliberately omitted "optimal" as it is generally difficult to find an optimal solution for many interesting real-world problems) that consider the following commonly existing uncertainties in real-world robotic systems:
 
 1. **motion outcome uncertainty**, where the robot cannot accurately predict its motion outcome after executing a control command,
 
