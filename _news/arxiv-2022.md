@@ -6,7 +6,7 @@ inline: true
 
 <div style="width: 100%;">
     <div style="width: 40%; float: left;"> 
-    Our paper on leveraging causal inference to learn robot motion model is on arxiv (submitted to ICRA 2022)
+    Our paper on leveraging causal inference to learn robot motion model is on arxiv (submitted to ICRA 2023)
     <a href="https://arxiv.org/pdf/2210.08679">Causal Inference for De-biasing Motion Estimation from Robotic Observational Data</a>.
     </div>
     <div style="width: 55%; float: right"> 
