@@ -1,11 +1,11 @@
 ---
 layout: about
-title: about
+title: About
 permalink: /
-subtitle: <a href='https://vail.sice.indiana.edu/'>Vehicle Autonomy and Intelligence Lab at Indiana University, Bloomington</a>.
+# subtitle: <a href='https://vail.sice.indiana.edu/'>Vehicle Autonomy and Intelligence Lab at Indiana University, Bloomington</a>.
 
 profile:
-  align: right
+  align: right 
   image: profile.jpg
   image_circular: false # crops the image to make it circular
   # address: >
@@ -14,21 +14,21 @@ profile:
   #   <p>Your City, State 12345</p>
 
 news: true  # includes a list of news items
-selected_papers: true # includes a list of papers marked as "selected={true}"
+selected_papers: false # includes a list of papers marked as "selected={true}"
 social: false  # includes social icons at the bottom of the page
 ---
+
 ## About Me
 
-I am a fifth-year Ph.D. candidate at Vehicle Autonomy and Intelligence Lab at Indiana University, Bloomington.
-My research focuses on decision-making under uncertainty for real-world robotic applications.
-I am particularly interested in developing practical and scalable decision-making algorithms (a.k.a. stochastic control -- I deliberately omitted "optimal" as it is generally difficult to find an optimal solution for many interesting real-world problems) that consider the following commonly existing uncertainties in real-world robotic systems:
+I am interested in developing methods that enable physical and virtual agents to safely explore their environments
+through interaction and enhance their understanding of the world. By continuously improving their world model, these
+agents can more effectively assist humans in completing tasks reliably and safely in uncertain, human-centered
+environments.
 
-1. **motion outcome uncertainty**, where the robot cannot accurately predict its motion outcome after executing a control command,
-
-2. **interaction uncertainty**, where the behaviors of other interacting agents are uncertain,
-
-3. **state uncertainty**, where the physical state of the robot cannot be accurately determined (e.g., localization error),
-
-4. **perception uncertainty**, where the outcome of a perception model is uncertain (e.g., object class cannot be predicted with certainty due to occlusion).
+Currently, I am working on safe reinforcement learning algorithms at Nuro, addressing challenging, safety-critical
+decision-making and planning problems in the realm of self-driving vehicles.
+I obtained my PhD from Indiana University, where my research centered on safe decision-making under uncertainty for
+real-world robotic systems.
+My work spans over multiple disciplines, including constrained stochastic optimal control, reinforcement learning, causal inference, game theory, and control as inference.
 
 Prior to my Ph.D., I also worked on [reducing DAgger's manual labeling in imitation learning](https://www.youtube.com/watch?v=BvOjQcOTBvU&t=55s&ab_channel=JunhongXu) and [multi-task imitation learning](https://arxiv.org/abs/1808.04503) for mobile robot navigation in indoor environments.

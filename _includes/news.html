@@ -1,6 +1,6 @@
           
           <div class="news">
-            <h2>News</h2>
+            <h2>Selected Research</h2>
             {% if site.news != blank -%} 
             {%- assign news_size = site.news | size -%}
             <div class="table-responsive" {% if site.news_scrollable and news_size > 10 %}style="max-height: 10vw"{% endif %}>
@@ -12,9 +12,11 @@
               {% assign news_limit = news_size %}
               {% endif %}
               {% for item in news limit: 10 %} 
+              
                 <tr>
-                  <th scope="row">{{ item.date | date: "%b, %Y" }}</th>
+                  <!-- <th scope="row">{{ item.date | date: "%b, %Y" }}</th> -->
                   <td>
+                    <h4> {{item.summary}} </h4>
                     {% if item.inline -%} 
                       {{ item.content | remove: '<p>' | remove: '</p>' | emojify }}
                     {%- else -%} 
