@@ -20,12 +20,18 @@ social: false  # includes social icons at the bottom of the page
 
 ## About Me
 
-My research focuses on developing methods that enable robots to assist humans reliably and safely in uncertain, human-centered environments.
-
-Currently, I am working on safe reinforcement learning algorithms at Nuro, addressing challenging, safety-critical
-decision-making and planning problems in the realm of self-driving vehicles.
 I obtained my PhD from Indiana University, where my research centered on safe decision-making under uncertainty for
 real-world robotic systems.
-My work spans over multiple disciplines, including constrained stochastic optimal control, reinforcement learning, causal inference, game theory, and control as inference.
+My research interest is designing methods that enhance the **safety (avoid undesirable states)** and
+**efficiency (accomplish tasks with the least amount of time/resources)** of robotic systems at
+**deployment time**.
+To achieve this goal, during my doctoral research, I focused on leveraging model uncertainty to improve deployment time
+robustness. I utilized potential model inaccuracies to develop planning algorithms that adopt conservative behaviors in
+high-uncertainty regions.
+Towards the end of my PhD, I also worked on generating diverse and trainable environments for reinforcement learning,
+aiming for deployment time generalization over environment distributions.
+
+After graduation, I joined Nuro.ai, working on safe reinforcement learning methods and generative models for addressing challenging, safety-critical
+decision-making and planning problems in the realm of self-driving vehicles.
 
 Prior to my Ph.D., I also worked on [reducing DAgger's manual labeling in imitation learning](https://www.youtube.com/watch?v=BvOjQcOTBvU&t=55s&ab_channel=JunhongXu) and [multi-task imitation learning](https://arxiv.org/abs/1808.04503) for mobile robot navigation in indoor environments.
