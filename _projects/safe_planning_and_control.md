@@ -19,7 +19,7 @@ img: /assets/img/offroad.gif
 <div style="display: flex; align-items: center; gap: 20px;">
     <div style="flex: 0 0 60%;">
         At the core of this problem involves solving a continuous state and action Markov Decision Process (MDP).
-        We propose a series of work that approximates and solves the continuous value function [RSS 2021] and integrates the proposed solver into a system that connects from perception to planning. This system has been heavily tested in real-world unstructured environments <a href="https://arxiv.org/pdf/2403.14956">[IJRR 2024]</a>.
+        We propose a series of work that approximates and solves the continuous value function <a href="https://arxiv.org/pdf/2006.02008">[RSS 2021]</a> and integrates the proposed solver into a system that connects from perception to planning. This system has been heavily tested in real-world unstructured environments <a href="https://arxiv.org/pdf/2403.14956">[IJRR 2024]</a>.
     </div>
     <div style="flex: 0 0 40%;">
         <img src="/assets/img/offroad.gif" alt="Offroad Demo" style="width: 400px; height: 260px; object-fit: contain;">
@@ -31,7 +31,7 @@ img: /assets/img/offroad.gif
 #### Causal Inference for Motion Model Learning
 <div style="display: flex; align-items: center; gap: 20px;">
     <div style="flex: 0 0 60%;">
-        The above work computes the value function and policy using probabilistic motion models realized by a Gaussian distribution, with parameters learned from historical offline driving data. While effective, learning from offline data poses unique challenges due to confounding variables that can bias the robot's understanding of action-state relationship. In <a href="https://arxiv.org/pdf/2210.08679">[ICRA 2023]</a>, we address this limitation using causal inference to learn more sophisticated motion models. 
+        The above work computes the value function and policy using probabilistic motion models realized by a Gaussian distribution, with parameters learned from historical offline driving data. While effective, learning from offline data poses unique challenges due to confounding variables that can bias the robot's understanding of action-state relationship. In a follow-up work published in <a href="https://arxiv.org/pdf/2210.08679">ICRA 2023</a>, we address this limitation using causal inference to learn more sophisticated motion models. 
     </div>
     <div style="flex: 0 0 40%;">
         <iframe src="https://www.youtube.com/embed/GWHKrVvzl4M?si=Y4cOqUf_00Vz4irG" width="400" height="260" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
