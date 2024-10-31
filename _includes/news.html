@@ -1,10 +1,9 @@
-          
           <div class="news">
-            <h2>Selected Research</h2>
+            <h2>News</h2>
             {% if site.news != blank -%} 
             {%- assign news_size = site.news | size -%}
-            <div class="table-responsive" {% if site.news_scrollable and news_size > 10 %}style="max-height: 10vw"{% endif %}>
-              <table class="table table-sm table-borderless">
+            <div class="news-list" {% if site.news_scrollable and news_size > 10 %}style="max-height: 10vw; overflow-y: auto"{% endif %}>
+              <ul class="news-ul">
               {%- assign news = site.news | reverse -%}
               {% if site.news_limit %}
               {% assign news_limit = site.news_limit %}
@@ -12,20 +11,19 @@
               {% assign news_limit = news_size %}
               {% endif %}
               {% for item in news limit: 10 %} 
-              
-                <tr>
-                  <!-- <th scope="row">{{ item.date | date: "%b, %Y" }}</th> -->
-                  <td>
-                    <h4> {{item.summary}} </h4>
-                    {% if item.inline -%} 
-                      {{ item.content | remove: '<p>' | remove: '</p>' | emojify }}
-                    {%- else -%} 
-                      <a class="news-title" href="{{ item.url | relative_url }}">{{ item.title }}</a>
-                    {%- endif %} 
-                  </td>
-                </tr>
+                <li class="news-item">
+                  <p class="news-date"><b>{{ item.date | date: "%B, %Y" }}</b> {{item.content | remove: '<p>' | remove: '</p>' }}</p>
+                  <!-- {% if item.inline -%}
+                    <span class="news-content">{{ item.content | remove: '<p>' | remove: '</p>' | emojify }}</span>
+                  {%- else -%}
+                    <a class="news-title" href="{{ item.url | relative_url }}">{{ item.title }}</a>
+                  {%- endif %}
+                  {% if item.description %}
+                    <div class="news-media">{{ item.description }}</div>
+                  {% endif %} -->
+                </li>
               {%- endfor %} 
-              </table>
+              </ul>
             </div>
           {%- else -%} 
             <p>No news so far...</p>
