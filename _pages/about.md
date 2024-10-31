@@ -25,6 +25,6 @@ I am currently at Nuro.ai working on safe reinforcement learning methods and gen
 challenging, safety-critical problems in autonomous driving.
 Prior to Nuro.ai, I obtained my PhD from [Indiana University, Bloomington](https://bloomington.iu.edu/index.html), where I worked with
 [Lantao Liu](https://luddy.indiana.edu/contact/profile/index.html?Lantao_Liu) in [Vehicle Autonomy and Intelligence
-Group](https://vail.sice.indiana.edu/).
+Lab](https://vail.sice.indiana.edu/).
 
 My research focuses on designing methods that enhance the safety and efficiency of robotic systems at deployment time. To achieve this goal, during my doctoral research, I focused on leveraging model uncertainty to improve deployment time robustness. I utilized potential model inaccuracies to develop planning algorithms that adopt conservative behaviors in high-uncertainty regions. Towards the end of my PhD, I also worked on generating diverse and trainable environments for reinforcement learning, aiming for deployment time generalization over environment distributions.
