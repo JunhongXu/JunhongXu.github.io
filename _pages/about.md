@@ -20,11 +20,6 @@ social: false  # includes social icons at the bottom of the page
 ---
 
 ## About Me
+I am currently a Postdoctoral Researcher at the University of Texas at Austin, working with [Roberto Martin-Martin](https://robertomartinmartin.com/) and [Peter Stone](https://www.cs.utexas.edu/~pstone/). Prior to UT Austin, I was a Senior Research Scientist at Nuro.ai, where I worked on reinforcement learning for generative policies (diffusion and flow-matching). I obtained my PhD from [Indiana University, Bloomington](https://bloomington.iu.edu/index.html), advised by [Lantao Liu](https://luddy.indiana.edu/contact/profile/index.html?Lantao_Liu) in the [Vehicle Autonomy and Intelligence Lab](https://vail.sice.indiana.edu/).
 
-I am currently at Nuro.ai working on safe reinforcement learning methods and generative models for addressing
-challenging, safety-critical problems in autonomous driving.
-Prior to Nuro.ai, I obtained my PhD from [Indiana University, Bloomington](https://bloomington.iu.edu/index.html), where I worked with
-[Lantao Liu](https://luddy.indiana.edu/contact/profile/index.html?Lantao_Liu) in [Vehicle Autonomy and Intelligence
-Lab](https://vail.sice.indiana.edu/).
-
-My research focuses on designing methods that enhance the safety and efficiency of robotic systems at deployment time. To achieve this goal, during my doctoral research, I focused on leveraging model uncertainty to improve deployment time robustness. I utilized potential model inaccuracies to develop planning algorithms that adopt conservative behaviors in high-uncertainty regions. Towards the end of my PhD, I also worked on generating diverse and trainable environments for reinforcement learning, aiming for deployment time generalization over environment distributions.
+My research focuses on enhancing the safety and efficiency of robotic systems at deployment time. During my PhD, I leveraged model uncertainty to develop planning algorithms that behave conservatively in high-uncertainty regions, improving deployment-time robustness. I also worked on generating diverse and trainable environments for reinforcement learning to achieve generalization over environment distributions. More recently, my work has centered on generative models for robot decision-making.
